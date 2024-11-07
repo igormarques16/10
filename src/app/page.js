@@ -4,52 +4,52 @@ import Pagina from "@/components/Pagina";
 import { Button, Card, Col, Row } from "react-bootstrap";
 
 export default function HomePage() {
-  const faculdades = JSON.parse(localStorage.getItem("faculdades")) || [];
-  const cursos = JSON.parse(localStorage.getItem("cursos")) || [];
+  const cliente = JSON.parse(localStorage.getItem("cliente")) || [];
+  const carro = JSON.parse(localStorage.getItem("carro")) || [];
+  const trabalho = JSON.parse(localStorage.getItem("trabalho")) || [];
+  const pecas = JSON.parse(localStorage.getItem("pecas")) || [];
   const professores = JSON.parse(localStorage.getItem("professores")) || [];
-  const disciplinas = JSON.parse(localStorage.getItem("disciplinas")) || [];
-  const alunos = JSON.parse(localStorage.getItem("alunos")) || [];
 
   const lista = [
     {
-      nome: "Faculdades",
+      nome: "Cliente",
       imagem:
-        "https://i.pinimg.com/236x/53/f4/63/53f463fcc23af8ec4fc28e7c5ccd168a.jpg",
-      quantidade: faculdades.length,
-      link: "/faculdades",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrKNc037SaJ_kzuOBkbKKemq-UMTnjRuhhsw&s",
+      quantidade: cliente.length,
+      link: "/cliente",
     },
     {
-      nome: "Cursos",
+      nome: "Carro",
       imagem:
-        "https://i.pinimg.com/474x/b2/1d/08/b21d0843c3a0d5f5586222644bf402cd.jpg",
-      quantidade: cursos.length,
-      link: "/cursos",
+        "https://www.media.stellantis.com/cache/e/8/7/e/f/e87efa1bbd5cc667f31fc5140302ee3fdcda993b.jpeg",
+      quantidade: carro.length,
+      link: "/carro",
     },
     {
-      nome: "Professores",
+      nome: "Serviços Prestado",
       imagem:
-        "https://i.pinimg.com/736x/39/09/fb/3909fb65bbab271bb5a9ddbf85c80d00.jpg",
-      quantidade: professores.length,
-      link: "/professores",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlj3LinipCUVYjt0dUCRQlbbFbnbixc_rJcQ&s",
+      quantidade: trabalho.length,
+      link: "/trabalho",
     },
     {
-      nome: "Disciplinas",
+      nome: "Pecas",
       imagem:
-        "https://i.pinimg.com/236x/79/0f/fc/790ffceeb183a1059b77c5558342ffc0.jpg",
-      quantidade: disciplinas.length,
-      link: "/disciplinas",
+        "https://i0.wp.com/benedett.com.br/wp-content/uploads/2020/10/autopecas-002.png",
+      quantidade: pecas.length,
+      link: "/pecas",
     },
     {
-      nome: "Alunos",
+      nome: "Outros",
       imagem:
         "https://i.pinimg.com/236x/ce/96/4d/ce964d843b92374b8b96e105ffa82831.jpg",
-      quantidade: alunos.length,
-      link: "/alunos",
+      quantidade: professores.length,
+      link: "/professores",
     },
   ];
 
   return (
-    <Pagina titulo={"Projeto IESB"}>
+    <Pagina titulo={"Oficina do Igor"}>
       <Row md={4}>
         {lista.map((item) => (
           <Col className="py-2">

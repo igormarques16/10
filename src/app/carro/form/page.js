@@ -8,39 +8,39 @@ import { FaArrowLeft, FaCheck } from "react-icons/fa";
 import { v4 } from "uuid";
 import * as Yup from "yup";
 
-export default function DisciplinaFormPage(props) {
+export default function carroFormPage(props) {
   const router = useRouter();
 
-  // Busca a lista de cursos e professores para usar nos selects
-  const cursos = JSON.parse(localStorage.getItem("cursos")) || [];
-  const professores = JSON.parse(localStorage.getItem("professores")) || [];
+  // Busca a lista de carroEditadas e modeloes para usar nos selects
+  const carroEditadas = JSON.parse(localStorage.getItem("carroEditadas")) || [];
+  const modeloes = JSON.parse(localStorage.getItem("modeloes")) || [];
 
   // Recupera o ID para edição, se disponível
   const id = props.searchParams.id;
-  const disciplinas = JSON.parse(localStorage.getItem("disciplinas")) || [];
-  const disciplinaEditada = disciplinas.find((item) => item.id == id);
+  const carros = JSON.parse(localStorage.getItem("carros")) || [];
+  const carroEditada = carros.find((item) => item.id == id);
 
   // Função para salvar os dados do form
   function salvar(dados) {
-    if (disciplinaEditada) {
-      Object.assign(disciplinaEditada, dados);
-      localStorage.setItem("disciplinas", JSON.stringify(disciplinas));
+    if (carroEditada) {
+      Object.assign(carroEditada, dados);
+      localStorage.setItem("carros", JSON.stringify(carros));
     } else {
       dados.id = v4();
-      disciplinas.push(dados);
-      localStorage.setItem("disciplinas", JSON.stringify(disciplinas));
+      carros.push(dados);
+      localStorage.setItem("carros", JSON.stringify(carros));
     }
 
-    alert("Disciplina salva com sucesso!");
-    router.push("/disciplinas");
+    alert("carro salva com sucesso!");
+    router.push("/carros");
   }
 
   // Valores iniciais do formulário
   const initialValues = {
     nome: "",
     descricao: "",
-    curso: "",
-    professor: "",
+    carroEditada: "",
+    modelo: "",
     status: "",
   };
 
@@ -48,15 +48,15 @@ export default function DisciplinaFormPage(props) {
   const validationSchema = Yup.object().shape({
     nome: Yup.string().required("Campo obrigatório"),
     descricao: Yup.string().required("Campo obrigatório"),
-    curso: Yup.string().required("Campo obrigatório"),
-    professor: Yup.string().required("Campo obrigatório"),
+    carroEditada: Yup.string().required("Campo obrigatório"),
+    modelo: Yup.string().required("Campo obrigatório"),
     status: Yup.string().required("Campo obrigatório"),
   });
 
   return (
-    <Pagina titulo={"Disciplina"}>
+    <Pagina titulo={"carro"}>
       <Formik
-        initialValues={disciplinaEditada || initialValues}
+        initialValues={carroEditada || initialValues}
         validationSchema={validationSchema}
         onSubmit={salvar}
       >
@@ -106,40 +106,40 @@ export default function DisciplinaFormPage(props) {
 
               <Row className="mb-2">
                 <Form.Group as={Col}>
-                  <Form.Label>Curso:</Form.Label>
+                  <Form.Label>carroEditada:</Form.Label>
                   <Form.Select
-                    name="curso"
-                    value={values.curso}
+                    name="carroEditada"
+                    value={values.carroEditada}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    isValid={touched.curso && !errors.curso}
-                    isInvalid={touched.curso && errors.curso}
+                    isValid={touched.carroEditada && !errors.carroEditada}
+                    isInvalid={touched.carroEditada && errors.carroEditada}
                   >
                     <option value="">Selecione</option>
-                    {cursos.map((curso) => (
-                      <option key={curso.id} value={curso.id}>
-                        {curso.nome}
+                    {carroEditadas.map((carroEditada) => (
+                      <option key={carroEditada.id} value={carroEditada.id}>
+                        {carroEditada.nome}
                       </option>
                     ))}
                   </Form.Select>
                   <Form.Control.Feedback type="invalid">
-                    {errors.curso}
+                    {errors.carroEditada}
                   </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group as={Col}>
-                  <Form.Label>Professor:</Form.Label>
+                  <Form.Label>Carro:</Form.Label>
                   <Form.Select
-                    name="professor"
-                    value={values.professor}
+                    name="modelo"
+                    value={values.modelo}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    isValid={touched.professor && !errors.professor}
-                    isInvalid={touched.professor && errors.professor}
+                    isValid={touched.modelo && !errors.modelo}
+                    isInvalid={touched.modelo && errors.modelo}
                   >
                     <option value="">Selecione</option>
-                    {professores
-                      .filter((prof) => prof.cursoId === values.curso)
+                    {modeloes
+                      .filter((prof) => prof.carroEditadaId === values.carroEditada)
                       .map((prof) => (
                         <option key={prof.id} value={prof.id}>
                           {prof.nome}
@@ -147,14 +147,14 @@ export default function DisciplinaFormPage(props) {
                       ))}
                   </Form.Select>
                   <Form.Control.Feedback type="invalid">
-                    {errors.professor}
+                    {errors.modelo}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
 
               <Row className="mb-2">
                 <Form.Group as={Col}>
-                  <Form.Label>Status:</Form.Label>
+                  <Form.Label>cOR:</Form.Label>
                   <Form.Select
                     name="status"
                     value={values.status}
@@ -174,7 +174,7 @@ export default function DisciplinaFormPage(props) {
               </Row>
 
               <Form.Group className="text-end">
-                <Button className="me-2" href="/disciplinas">
+                <Button className="me-2" href="/carros">
                   <FaArrowLeft /> Voltar
                 </Button>
                 <Button type="submit" variant="success">

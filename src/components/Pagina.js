@@ -10,11 +10,11 @@ export default function Pagina({ titulo, children }) {
         <Container>
           <Navbar.Brand href="/">Home</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="/faculdades">Faculdades</Nav.Link>
-            <Nav.Link href="/cursos">Cursos</Nav.Link>
-            <Nav.Link href="/disciplinas">Disciplinas</Nav.Link>
-            <Nav.Link href="/professores">Professores</Nav.Link>
-            <Nav.Link href="/alunos">Alunos</Nav.Link>
+            <Nav.Link href="/cliente">Cliente</Nav.Link>
+            <Nav.Link href="/carro">Carro</Nav.Link>
+            <Nav.Link href="/trabalho">Serviços</Nav.Link>
+            <Nav.Link href="/pecas">Pecas</Nav.Link>
+            <Nav.Link href="/professores">Outros</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
