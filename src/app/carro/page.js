@@ -29,7 +29,7 @@ export default function carrosPage() {
   return (
     <Pagina titulo={"Carro"}>
       <div className="text-end mb-2">
-        <Button href="/carros/form">
+        <Button href="/carro/form">
           <FaPlusCircle /> Novo
         </Button>
       </div>
@@ -51,7 +51,7 @@ export default function carrosPage() {
               <td>{carro.Ano}</td>
               <td className="text-center">
                 {/* Botões das ações */}
-                <Button className="me-2" href={`/carros/form?id=${carro.id}`}>
+                <Button className="me-2" href={`/carro/form?id=${carro.id}`}>
                   <FaPen />
                 </Button>
                 <Button variant="danger" onClick={() => excluir(carro)}>

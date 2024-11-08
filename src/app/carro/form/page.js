@@ -106,7 +106,7 @@ export default function carroFormPage(props) {
 
               <Row className="mb-2">
                 <Form.Group as={Col}>
-                  <Form.Label>carroEditada:</Form.Label>
+                  <Form.Label>Marca:</Form.Label>
                   <Form.Select
                     name="carroEditada"
                     value={values.carroEditada}
@@ -116,6 +116,12 @@ export default function carroFormPage(props) {
                     isInvalid={touched.carroEditada && errors.carroEditada}
                   >
                     <option value="">Selecione</option>
+                    <option value="Ativo">Ford</option> 
+                    <option value="Ativo">Honda</option>
+                    <option value="Ativo">Hyundai</option>
+                    <option value="Ativo">Nissan</option>
+                    <option value="Ativo">Fiat</option>
+                    <option value="Ativo">BMW</option>          
                     {carroEditadas.map((carroEditada) => (
                       <option key={carroEditada.id} value={carroEditada.id}>
                         {carroEditada.nome}
@@ -174,7 +180,7 @@ export default function carroFormPage(props) {
               </Row>
 
               <Form.Group className="text-end">
-                <Button className="me-2" href="/carros">
+                <Button className="me-2" href="/carro">
                   <FaArrowLeft /> Voltar
                 </Button>
                 <Button type="submit" variant="success">

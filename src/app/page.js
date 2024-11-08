@@ -1,7 +1,8 @@
 "use client";
-
+import './banner.css'
 import Pagina from "@/components/Pagina";
 import { Button, Card, Col, Row } from "react-bootstrap";
+
 
 export default function HomePage() {
   const cliente = JSON.parse(localStorage.getItem("cliente")) || [];
@@ -49,23 +50,27 @@ export default function HomePage() {
   ];
 
   return (
-    <Pagina titulo={"Oficina do Igor"}>
-      <Row md={4}>
-        {lista.map((item) => (
-          <Col className="py-2">
-            <Card style={{ height: "100%" }}>
-              <Card.Img src={item.imagem} style={{ height: "100%" }} />
-              <Card.Body>
-                <Card.Title>{item.nome}</Card.Title>
-                Cadastrados: {item.quantidade}
-              </Card.Body>
-              <Card.Footer className="text-end">
-                <Button href={item.link}>Ver Lista</Button>
-              </Card.Footer>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-    </Pagina>
+    <Pagina >
+  <h1 style={{ fontSize: "4rem", color: "#000000", textAlign: "center" }}>
+    Oficina do Igor
+  </h1>
+  <Row md={4}>
+    {lista.map((item) => (
+      <Col className="py-2">
+        <Card style={{ height: "100%" }}>
+          <Card.Img src={item.imagem} style={{ height: "100%" }} />
+          <Card.Body>
+            <Card.Title>{item.nome}</Card.Title>
+            Cadastrados: {item.quantidade}
+          </Card.Body>
+          <Card.Footer className="text-end">
+            <Button href={item.link}>Ver Lista</Button>
+          </Card.Footer>
+        </Card>
+      </Col>
+    ))}
+  </Row>
+</Pagina>
+
   );
 }

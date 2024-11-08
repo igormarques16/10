@@ -228,7 +228,7 @@ export default function clienteFormPage(props) {
 
                 {/* botões */}
                 <Form.Group className="text-end">
-                  <Button className="me-2" href="/clientes">
+                  <Button className="me-2" href="/cliente">
                     <FaArrowLeft /> Voltar
                   </Button>
                   <Button type="submit" variant="success">

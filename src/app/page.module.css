@@ -3,7 +3,7 @@
   --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
   --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
 
-  --button-primary-hover: #389087;
+  --button-primary-hover: #07ffe6;
   --button-secondary-hover: #f2f2f2;
 
   display: grid;
@@ -23,7 +23,7 @@
     --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
 
     --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
+    --button-secondary-hover: #ff0000;
   }
 }
 

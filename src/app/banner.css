@@ -1,0 +1,9 @@
+body {
+  background-image: url('https://img.freepik.com/fotos-premium/composicao-mecanica-moderna-de-automoveis_23-2147881644.jpg?semt=ais_hybrid'); /* Caminho para a imagem dentro de public */
+  background-size: cover;  /* A imagem vai cobrir toda a tela */
+  background-position: center center; /* A imagem será centralizada */
+  background-repeat: no-repeat; /* Não repete a imagem */
+  min-height: 100vh; /* Garante que a imagem ocupe toda a altura da página */
+  margin: 0;  /* Remove a margem padrão */
+  padding: 0; /* Remove o padding padrão */
+}
