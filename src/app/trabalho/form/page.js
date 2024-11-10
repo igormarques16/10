@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react"; // Importando React e useEffect corretamente
 import Pagina from "@/components/Pagina";
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
@@ -8,174 +9,102 @@ import { FaArrowLeft, FaCheck } from "react-icons/fa";
 import { v4 } from "uuid";
 import * as Yup from "yup";
 
-export default function trabalhoFormPage(props) {
-  // router -> hook para navegação de telas
-  const router = useRouter();
+export default function mecanicoFormPage(props) 
+  {
+    const [mecanico, setmecanico] = useState({
+      mecanico: "",
+      carro: "", 
+      mecanicos: "",
+  
+    });
+  
+    const [servico, setservico] = useState([]);
+    const [caro, setcaro] = useState([]);
+  
+    const router = useRouter();
+  
+  
+    useEffect(() => {
+      const servicoLocalStorage =
+        JSON.parse(localStorage.getItem("servico")) || [];
+      setservico(servicoLocalStorage);
+    }, []);
+  
+  
+    useEffect(() => {
+      if (mecanico.mecanico) {
+        const caroLocalStorage =
+          JSON.parse(localStorage.getItem("caro")) || [];
+        const caroFiltrados = caroLocalStorage.filter(
+          (c) => c.mecanicoId === mecanico.mecanico
+        );
+        setcaro(caroFiltrados);
+      } else {
+        setcaro([]);
+      }
+    }, [mecanico.mecanico]);
+  
+  
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setmecanico({ ...mecanico, [name]: value });
+    };
+  
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      const mecanicosLocalStorage = JSON.parse(localStorage.getItem("mecanicos")) || [];
+      mecanico.id = Date.now();
+      mecanicosLocalStorage.push(mecanico);
+      localStorage.setItem("mecanicos", JSON.stringify(mecanicosLocalStorage));
+      alert("Peça adicionada a lista");
+      router.push("/mecanicos");
+    };
+  
+    return (
+      <Pagina titulo={"Cadastro de Peças Desejada:"}>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="formmecanico">
+            <Form.Label>Peça Desejada:</Form.Label>
+            <Form.Control
+              type="text"
+              name="mecanico"
+              value={mecanico.mecanico}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+          <Form.Group controlId="formmecanico">
+            <Form.Label>caro da Peça:</Form.Label>
+            <Form.Control
+              type="text"
+              name="caro"
+              value={mecanico.caro}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+          <Form.Group controlId="formservico">
+            <Form.Label>servico da peça:</Form.Label>
+            <Form.Control
+              type="servico"
+              name="servico"
+              value={mecanico.servico}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+  
+          <hr></hr>
+          <Button variant="primary" type="submit">
+            Salvar
+          </Button>
+        </Form>
+      </Pagina>
+  
+    );
 
-  // Busca a lista de trabalhos para usar no select
-  const trabalho = JSON.parse(localStorage.getItem("trabalhos")) || [];
-
-  // Buscar a lista de trabalhos no localStorage, se não existir, inicializa uma lista vazia
-  const trabalhos = JSON.parse(localStorage.getItem("trabalhos")) || [];
-
-  // Recuperando id para edição
-  const id = props.searchParams.id;
-  console.log(props.searchParams.id);
-  // Buscar na lista a trabalho com o ID recebido no parametro
-  const trabalhoEditado = trabalhos.find((item) => item.id == id);
-  console.log(trabalhoEditado);
-
-  // função para salvar os dados do form
-  function salvar(dados) {
-    // Se trabalhoEditado existe, mudar os dados e gravar no localStorage
-    if (trabalhoEditado) {
-      Object.assign(trabalhoEditado, dados);
-      // Substitui a lista antiga pela nova no localStorage
-      localStorage.setItem("trabalhos", JSON.stringify(trabalhos));
-    } else {
-      // se trabalhoEditado não existe, é criação de uma nova
-      // gerar um ID (Identificador unico)
-      dados.id = v4();
-      // Adiciona a nova trabalho na lista de trabalhos
-      trabalhos.push(dados);
-      // Substitui a lista antiga pela nova no localStorage
-      localStorage.setItem("trabalhos", JSON.stringify(trabalhos));
-    }
-
-    alert("Ordem criado com sucesso!");
-    router.push("/trabalhos");
-  }
 
   
-
-  // Campos do form e valores iniciais(default)
-  const initialValues = {
-    nome: "",
-    carro: "",
-    area: "",
-    nota: "",
-    status: "",
-    trabalho: "",
-  };
-
-  // Esquema de validação com Yup
-  const validationSchema = Yup.object().shape({
-    nome: Yup.string().required("Campo obrigatório"),
-    carro: Yup.string().required("Campo obrigatório"),
-    area: Yup.string().required("Campo obrigatório"),
-    nota: Yup.number()
-      .min(1, "Nota inválida")
-      .max(5, "Nota inválida")
-      .required("Campo obrigatório"),
-    status: Yup.string().required("Campo obrigatório"),
-    trabalho: Yup.string().required("Campo obrigatório"),
-  });
-
-  return (
-    <Pagina titulo={"Ordem De Serviço"}>
-      {/* Formulário */}
-
-      <Formik
-        // Atributos do formik
-        // Se for edição, coloca os dados de trabalhoEditado
-        // Se for nova, colocar o initialValues com os valores vazios
-        initialValues={trabalhoEditado || initialValues}
-        validationSchema={validationSchema}
-        onSubmit={salvar}
-      >
-        {/* construção do template do formulário */}
-        {
-          // os valores e funções do formik
-          ({
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-          }) => {
-            // ações do formulário
-            // debug
-            // console.log("DEBUG >>>")
-            // console.log({values, errors, touched})
-
-            // retorno com o template jsx do formulário
-            return (
-              <Form onSubmit={handleSubmit}>
-                {/* Campos do form */}
-                <Row className="mb-2">
-                  <Form.Group as={Col}>
-                    <Form.Label>Mecanico:</Form.Label>
-                    <Form.Control
-                      name="nome"
-                      type="text"
-                      value={values.nome}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      isValid={touched.nome && !errors.nome}
-                      isInvalid={touched.nome && errors.nome}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.nome}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-
-                  <Form.Group as={Col}>
-                    <Form.Label>Carro (Modelo):</Form.Label>
-                    <Form.Control
-                      name="carro"
-                      type="text"
-                      value={values.carro}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      isValid={touched.carro && !errors.carro}
-                      isInvalid={touched.carro && errors.carro}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.carro}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                </Row>
-
-                
-
-                <Row className="mb-2">
-                  <Form.Group as={Col}>
-                    <Form.Label>Status:</Form.Label>
-                    <Form.Select
-                      name="status"
-                      value={values.status}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      isValid={touched.status && !errors.status}
-                      isInvalid={touched.status && errors.status}
-                    >
-                      <option value="">Selecione</option>
-                      <option value="mecanica">Mecanica</option>
-                      <option value="Lanternagen">Lanternagen</option>
-                    </Form.Select>
-                    <Form.Control.Feedback type="invalid">
-                      {errors.status}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-
-                  
-                </Row>
-
-                {/* botões */}
-                <Form.Group className="text-end">
-                  <Button className="me-2" href="/trabalho">
-                    <FaArrowLeft /> Voltar
-                  </Button>
-                  <Button type="submit" variant="success">
-                    <FaCheck /> Enviar
-                  </Button>
-                </Form.Group>
-              </Form>
-            );
-          }
-        }
-      </Formik>
-    </Pagina>
-  );
+  
 }

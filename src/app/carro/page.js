@@ -5,36 +5,36 @@ import { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { FaPen, FaPlusCircle, FaTrash } from "react-icons/fa";
 
-export default function carrosPage() {
-  const [carros, setcarros] = useState([]);
+export default function carroPage() {
+  const [carro, setcarro] = useState([]);
 
-  // Carrega as carros quando a tela é acessada
+  // Carrega as carro quando a tela é acessada
   useEffect(() => {
-    // Busca as carros do localStorage, se não existir, inicia uma lista vazia
-    const carrosLocalStorage = JSON.parse(localStorage.getItem("carros")) || [];
-    setcarros(carrosLocalStorage);
-    console.log(carrosLocalStorage);
+    // Busca as carro do localStorage, se não existir, inicia uma lista vazia
+    const carroLocalStorage = JSON.parse(localStorage.getItem("carro")) || [];
+    setcarro(carroLocalStorage);
+    console.log(carroLocalStorage);
   }, []);
 
   // Função para exclusão de uma carro
   function excluir(carro) {
     if (window.confirm(`Deseja realmente excluir a carro ${carro.nome}?`)) {
-      const novaLista = carros.filter((item) => item.id !== carro.id);
-      localStorage.setItem("carros", JSON.stringify(novaLista));
-      setcarros(novaLista);
+      const novaLista = carro.filter((item) => item.id !== carro.id);
+      localStorage.setItem("carro", JSON.stringify(novaLista));
+      setcarro(novaLista);
       alert("carro excluída com sucesso!");
     }
   }
 
   return (
-    <Pagina titulo={"Carro"}>
+    <Pagina titulo={"carro"}>
       <div className="text-end mb-2">
         <Button href="/carro/form">
           <FaPlusCircle /> Novo
         </Button>
       </div>
 
-      {/* Tabela com as carros */}
+      {/* Tabela com as carro */}
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -44,9 +44,9 @@ export default function carrosPage() {
           </tr>
         </thead>
         <tbody>
-          {carros.map((carro) => (
+          {carro.map((carro) => (
             <tr key={carro.id}>
-              <td>{carro.Modelos}</td>
+              <td>{carro.carro}</td>
               <td>{carro.Cor}</td>
               <td>{carro.Ano}</td>
               <td className="text-center">

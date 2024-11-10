@@ -20,13 +20,13 @@ export default function clienteFormPage(props) {
   const [cidades, setCidades] = useState([]);
 
   // Buscar a lista de clientes no localStorage, se não existir, inicializa uma lista vazia
-  const clientes = JSON.parse(localStorage.getItem("cliente")) || [];
+  const cliente = JSON.parse(localStorage.getItem("cliente")) || [];
 
   // Recuperando id para edição
   const id = props.searchParams.id;
   console.log(props.searchParams.id);
   // Buscar na lista a cliente com o ID recebido no parametro
-  const clienteEditada = clientes.find((item) => item.id == id);
+  const clienteEditada = cliente.find((item) => item.id == id);
   console.log(clienteEditada);
 
   // carregar os dados na inicialização da página
@@ -49,19 +49,19 @@ export default function clienteFormPage(props) {
     if (clienteEditada) {
       Object.assign(clienteEditada, dados);
       // Substitui a lista antiga pela nova no localStorage
-      localStorage.setItem("clientes", JSON.stringify(clientes));
+      localStorage.setItem("cliente", JSON.stringify(cliente));
     } else {
       // se clienteEditada não existe, é criação de uma nova
       // gerar um ID (Identificador unico)
       dados.id = v4();
       // Adiciona a nova cliente na lista de clientes
-      clientes.push(dados);
+      cliente.push(dados);
       // Substitui a lista antiga pela nova no localStorage
-      localStorage.setItem("clientes", JSON.stringify(clientes));
+      localStorage.setItem("cliente", JSON.stringify(cliente));
     }
 
     alert("cliente criada com sucesso!");
-    router.push("/clientes");
+    router.push("/cliente");
   }
 
   // Campos do form e valores iniciais(default)

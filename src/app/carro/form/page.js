@@ -13,22 +13,22 @@ export default function carroFormPage(props) {
 
   // Busca a lista de carroEditadas e modeloes para usar nos selects
   const carroEditadas = JSON.parse(localStorage.getItem("carroEditadas")) || [];
-  const modeloes = JSON.parse(localStorage.getItem("modeloes")) || [];
+  
 
   // Recupera o ID para edição, se disponível
   const id = props.searchParams.id;
-  const carros = JSON.parse(localStorage.getItem("carros")) || [];
-  const carroEditada = carros.find((item) => item.id == id);
+  const carro = JSON.parse(localStorage.getItem("carro")) || [];
+  const carroEditada = carro.find((item) => item.id == id);
 
   // Função para salvar os dados do form
   function salvar(dados) {
     if (carroEditada) {
       Object.assign(carroEditada, dados);
-      localStorage.setItem("carros", JSON.stringify(carros));
+      localStorage.setItem("carro", JSON.stringify(carro));
     } else {
       dados.id = v4();
-      carros.push(dados);
-      localStorage.setItem("carros", JSON.stringify(carros));
+      carro.push(dados);
+      localStorage.setItem("carro", JSON.stringify(carro));
     }
 
     alert("carro salva com sucesso!");
@@ -38,10 +38,9 @@ export default function carroFormPage(props) {
   // Valores iniciais do formulário
   const initialValues = {
     nome: "",
-    descricao: "",
+    
     carroEditada: "",
-    modelo: "",
-    status: "",
+    cor: "", // Adiciona o campo "cor" nos valores iniciais
   };
 
   // Validação com Yup
@@ -49,12 +48,11 @@ export default function carroFormPage(props) {
     nome: Yup.string().required("Campo obrigatório"),
     descricao: Yup.string().required("Campo obrigatório"),
     carroEditada: Yup.string().required("Campo obrigatório"),
-    modelo: Yup.string().required("Campo obrigatório"),
-    status: Yup.string().required("Campo obrigatório"),
+    cor: Yup.string().required("Campo obrigatório"), // Valida o campo "cor"
   });
 
   return (
-    <Pagina titulo={"carro"}>
+    <Pagina titulo={"Seu Carro!"}>
       <Formik
         initialValues={carroEditada || initialValues}
         validationSchema={validationSchema}
@@ -116,12 +114,12 @@ export default function carroFormPage(props) {
                     isInvalid={touched.carroEditada && errors.carroEditada}
                   >
                     <option value="">Selecione</option>
-                    <option value="Ativo">Ford</option> 
+                    <option value="Ativo">Ford</option>
                     <option value="Ativo">Honda</option>
                     <option value="Ativo">Hyundai</option>
                     <option value="Ativo">Nissan</option>
                     <option value="Ativo">Fiat</option>
-                    <option value="Ativo">BMW</option>          
+                    <option value="Ativo">BMW</option>
                     {carroEditadas.map((carroEditada) => (
                       <option key={carroEditada.id} value={carroEditada.id}>
                         {carroEditada.nome}
@@ -133,59 +131,36 @@ export default function carroFormPage(props) {
                   </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group as={Col}>
-                  <Form.Label>Carro:</Form.Label>
-                  <Form.Select
-                    name="modelo"
-                    value={values.modelo}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    isValid={touched.modelo && !errors.modelo}
-                    isInvalid={touched.modelo && errors.modelo}
-                  >
-                    <option value="">Selecione</option>
-                    {modeloes
-                      .filter((prof) => prof.carroEditadaId === values.carroEditada)
-                      .map((prof) => (
-                        <option key={prof.id} value={prof.id}>
-                          {prof.nome}
-                        </option>
-                      ))}
-                  </Form.Select>
-                  <Form.Control.Feedback type="invalid">
-                    {errors.modelo}
-                  </Form.Control.Feedback>
-                </Form.Group>
+                
               </Row>
 
               <Row className="mb-2">
                 <Form.Group as={Col}>
-                  <Form.Label>cOR:</Form.Label>
-                  <Form.Select
-                    name="status"
-                    value={values.status}
+                  <Form.Label>Cor do Veículo:</Form.Label>
+                  <Form.Control
+                    name="cor"
+                    type="text"
+                    value={values.cor}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    isValid={touched.status && !errors.status}
-                    isInvalid={touched.status && errors.status}
-                  >
-                    <option value="">Selecione</option>
-                    <option value="Ativo">Ativo</option>
-                    <option value="Inativo">Inativo</option>
-                  </Form.Select>
+                    isValid={touched.cor && !errors.cor}
+                    isInvalid={touched.cor && errors.cor}
+                  />
                   <Form.Control.Feedback type="invalid">
-                    {errors.status}
+                    {errors.cor}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
 
-              <Form.Group className="text-end">
-                <Button className="me-2" href="/carro">
-                  <FaArrowLeft /> Voltar
-                </Button>
-                <Button type="submit" variant="success">
-                  <FaCheck /> Enviar
-                </Button>
+              <Form.Group as={Row} className="text-end mt-3">
+                <Col>
+                  <Button className="me-2" href="/carro" variant="secondary">
+                    <FaArrowLeft /> Voltar
+                  </Button>
+                  <Button type="submit" variant="success">
+                    <FaCheck /> Enviar
+                  </Button>
+                </Col>
               </Form.Group>
             </Form>
           );
