@@ -1,9 +1,29 @@
 body {
-  background-image: url('https://img.freepik.com/fotos-premium/composicao-mecanica-moderna-de-automoveis_23-2147881644.jpg?semt=ais_hybrid'); /* Caminho para a imagem dentro de public */
-  background-size: cover;  /* A imagem vai cobrir toda a tela */
-  background-position: center center; /* A imagem será centralizada */
-  background-repeat: no-repeat; /* Não repete a imagem */
-  min-height: 100vh; /* Garante que a imagem ocupe toda a altura da página */
-  margin: 0;  /* Remove a margem padrão */
-  padding: 0; /* Remove o padding padrão */
+  background-image: url('https://img.freepik.com/fotos-premium/composicao-mecanica-moderna-de-automoveis_23-2147881644.jpg?semt=ais_hybrid');
+
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.interactive-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 4px 12px rgb(4, 151, 236);
+  transition: transform 0.5s ease;
+}
+
+/* globals.css */
+
+/* Estilo de fundo para todas as páginas */
+body {
+  background-image: url('https://img.freepik.com/fotos-premium/composicao-mecanica-moderna-de-automoveis_23-2147881644.jpg?semt=ais_hybrid');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }

@@ -1,5 +1,5 @@
 "use client";
-
+import '../../banner.css'
 import Pagina from "@/components/Pagina";
 import apiLocalidades from "@/services/apiLocalidades";
 import { Formik } from "formik";
@@ -225,7 +225,7 @@ export default function clienteFormPage(props) {
                     </Form.Control.Feedback>
                   </Form.Group>
                 </Row>
-
+                <hr></hr>
                 {/* botões */}
                 <Form.Group className="text-end">
                   <Button className="me-2" href="/cliente">

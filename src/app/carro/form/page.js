@@ -1,5 +1,5 @@
 "use client";
-
+import '../../banner.css'
 import Pagina from "@/components/Pagina";
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
@@ -13,7 +13,7 @@ export default function carroFormPage(props) {
 
   // Busca a lista de carroEditadas e modeloes para usar nos selects
   const carroEditadas = JSON.parse(localStorage.getItem("carroEditadas")) || [];
-  
+
 
   // Recupera o ID para edição, se disponível
   const id = props.searchParams.id;
@@ -38,7 +38,7 @@ export default function carroFormPage(props) {
   // Valores iniciais do formulário
   const initialValues = {
     nome: "",
-    
+
     carroEditada: "",
     cor: "", // Adiciona o campo "cor" nos valores iniciais
   };
@@ -131,7 +131,7 @@ export default function carroFormPage(props) {
                   </Form.Control.Feedback>
                 </Form.Group>
 
-                
+
               </Row>
 
               <Row className="mb-2">
@@ -151,7 +151,7 @@ export default function carroFormPage(props) {
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
-
+              <hr></hr>
               <Form.Group as={Row} className="text-end mt-3">
                 <Col>
                   <Button className="me-2" href="/carro" variant="secondary">

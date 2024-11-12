@@ -1,5 +1,6 @@
 "use client";
 
+import '../banner.css'
 import Pagina from "@/components/Pagina";
 import { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
@@ -22,12 +23,12 @@ export default function carroPage() {
       const novaLista = carro.filter((item) => item.id !== carro.id);
       localStorage.setItem("carro", JSON.stringify(novaLista));
       setcarro(novaLista);
-      alert("carro excluída com sucesso!");
+      alert("carro excluídO com sucesso!");
     }
   }
 
   return (
-    <Pagina titulo={"carro"}>
+    <Pagina titulo={"CADASTRE SEU CARRO:"}>
       <div className="text-end mb-2">
         <Button href="/carro/form">
           <FaPlusCircle /> Novo

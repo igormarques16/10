@@ -1,5 +1,5 @@
 "use client";
-
+import '../../banner.css'
 import Pagina from "@/components/Pagina";
 import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
@@ -90,7 +90,7 @@ export default function Cadastropeca() {
             required
           />
         </Form.Group>
-
+        <hr></hr>
         <hr></hr>
         <Button variant="primary" type="submit">
           Salvar

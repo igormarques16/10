@@ -1,5 +1,5 @@
 "use client";
-
+import '../banner.css'
 import Pagina from "@/components/Pagina";
 import { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
@@ -36,7 +36,7 @@ export default function pecasPage() {
             <th>Peças </th>
             <th>Codigos</th>
             <th>Marca</th>
-            
+
           </tr>
         </thead>
         <tbody>
@@ -45,7 +45,7 @@ export default function pecasPage() {
               <td>{pecas.peca}</td>
               <td>{pecas.codigo}</td>
               <td>{pecas.marca}</td>
-             
+
               <td className="text-center">
                 <Button className="me-2" href={`/pecas/form?id=${pecas.id}`}>
                   <FaPen />

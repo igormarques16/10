@@ -1,5 +1,8 @@
 "use client";
 
+
+
+import '../banner.css'
 import Pagina from "@/components/Pagina";
 import { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
@@ -16,7 +19,7 @@ export default function trabalhoPage() {
     const trabalhoLocalStorage = JSON.parse(localStorage.getItem("trabalhos")) || [];
 
     settrabalhos(trabalhoLocalStorage);
-   
+
   }, []);
   const excluir = (trabalho) => {
 
@@ -52,25 +55,25 @@ export default function trabalhoPage() {
         </thead>
         <tbody>
           {trabalhos.map((trabalhos) => (
-             
-              <tr key={trabalhos.id}>
 
-                <td>{trabalhos.mecanico}</td>
-                <td>{trabalhos.servico}</td>
-                <td>{trabalhos.valor}</td>
+            <tr key={trabalhos.id}>
+
+              <td>{trabalhos.mecanico}</td>
+              <td>{trabalhos.servico}</td>
+              <td>{trabalhos.valor}</td>
 
 
-                <td className="text-center">
-                  {/* Botões das ações */}
-                  <Button className="me-2" href={`/trabalhos/form?id=${trabalhos.id}`}>
-                    <FaPen />
-                  </Button>
-                  <Button variant="danger" onClick={() => excluir(trabalhos)}>
-                    <FaTrash />
-                  </Button>
-                </td>
-              </tr>
-            ))
+              <td className="text-center">
+                {/* Botões das ações */}
+                <Button className="me-2" href={`/trabalhos/form?id=${trabalhos.id}`}>
+                  <FaPen />
+                </Button>
+                <Button variant="danger" onClick={() => excluir(trabalhos)}>
+                  <FaTrash />
+                </Button>
+              </td>
+            </tr>
+          ))
           }
         </tbody>
       </Table>

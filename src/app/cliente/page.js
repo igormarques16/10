@@ -1,5 +1,6 @@
 "use client";
 
+import '../banner.css'
 import Pagina from "@/components/Pagina";
 import { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
@@ -22,10 +23,10 @@ export default function clientePage() {
   function excluir(cliente) {
     // Confirma com o usuário a exclusão
     if (
-      window.confirm(`Deseja realmente excluir a cliente ${cliente.nome}?`)
+      window.confirm(`Deseja realmente excluir a cliente ${cliente.id}?`)
     ) {
       // filtra a lista antiga removando a cliente recebida
-      const novaLista = cliente.filter((item) => item.id !== cliente.id);
+      const novaLista = cliente.filter((item) => item.id !== clienteRemover.id);
       // grava no localStorage a nova lista
       localStorage.setItem("cliente", JSON.stringify(novaLista));
       // grava a nova lista no estado para renderizar na tela
