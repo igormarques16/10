@@ -14,9 +14,9 @@ export default function trabalhoPage() {
 
   useEffect(() => {
     // Busca a lista do localStorage, se não existir, inicia uma vazia
-    const trabalhosLocalStorage = JSON.parse(localStorage.getItem("trabalhos")) || [];
+    const trabalhosLocalStorage = JSON.parse(localStorage.getItem("trabalho")) || [];
 
-    const trabalhoLocalStorage = JSON.parse(localStorage.getItem("trabalhos")) || [];
+    const trabalhoLocalStorage = JSON.parse(localStorage.getItem("trabalho")) || [];
 
     settrabalhos(trabalhoLocalStorage);
 
@@ -48,8 +48,8 @@ export default function trabalhoPage() {
           <tr>
             <th>Mecanico:</th>
             <th>servico:</th>
-            <th>Valor:</th>
-
+            <th>Especificaçoes:</th>
+            <th>:</th>
 
           </tr>
         </thead>
@@ -60,7 +60,7 @@ export default function trabalhoPage() {
 
               <td>{trabalhos.mecanico}</td>
               <td>{trabalhos.servico}</td>
-              <td>{trabalhos.valor}</td>
+              <td>{trabalhos.feito}</td>
 
 
               <td className="text-center">

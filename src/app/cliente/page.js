@@ -7,30 +7,30 @@ import { Button, Table } from "react-bootstrap";
 import { FaPen, FaPlusCircle, FaTrash } from "react-icons/fa";
 
 export default function clientePage() {
-  const [cliente, setcliente] = useState([]);
+  const [clientes, setclientes] = useState([]);
 
-  // Faz alguma coisa quando o usuário acessa a tela
+ 
   useEffect(() => {
-    // Busca a lista do localStorage, se não existir, inicia uma vazia
+
     const clienteLocalStorage =
       JSON.parse(localStorage.getItem("cliente")) || [];
-    // guarda a lista no estado cliente
-    setcliente(clienteLocalStorage);
+   
+    setclientes(clienteLocalStorage);
     console.log(clienteLocalStorage);
   }, []);
 
-  // Função para exclusão do item
+  
   function excluir(cliente) {
-    // Confirma com o usuário a exclusão
+   
     if (
-      window.confirm(`Deseja realmente excluir a cliente ${cliente.id}?`)
+      window.confirm(`Deseja realmente excluir a cliente ${cliente.cliente}?`)
     ) {
-      // filtra a lista antiga removando a cliente recebida
-      const novaLista = cliente.filter((item) => item.id !== clienteRemover.id);
+     
+      const novaLista = clientes.filter((item) => item.id !== cliente.id);
       // grava no localStorage a nova lista
       localStorage.setItem("cliente", JSON.stringify(novaLista));
       // grava a nova lista no estado para renderizar na tela
-      setcliente(novaLista);
+      setclientes(novaLista);
       alert("cliente excluída com sucesso!");
     }
   }
@@ -50,27 +50,29 @@ export default function clientePage() {
             <th>Nome</th>
             <th>Endereço</th>
             <th>Estado</th>
+            <th>Bairro</th>
             <th>Cidade</th>
+            <th>Altere</th>
           </tr>
         </thead>
         <tbody>
-          {cliente.map((cliente) => {
+          {clientes.map((clientes) => {
             return (
-              <tr>
-                <td>{cliente.nome}</td>
-                <td>{cliente.endereco}</td>
-                <td>{cliente.pais}</td>
-                <td>{cliente.estado}</td>
-                <td>{cliente.cidade}</td>
+              <tr key={clientes.id}>
+                <td>{clientes.nome}</td>
+                <td>{clientes.endereco}</td>
+                <td>{clientes.pais}</td>
+                <td>{clientes.estado}</td>
+                <td>{clientes.cidade}</td>
                 <td className="text-center">
                   {/* Botões das ações */}
                   <Button
                     className="me-2"
-                    href={`/cliente/form?id=${cliente.id}`}
+                    href={`/cliente/form?id=${clientes}`}
                   >
                     <FaPen />
                   </Button>
-                  <Button variant="danger" onClick={() => excluir(cliente)}>
+                  <Button variant="danger" onClick={() => excluir(clientes)}>
                     <FaTrash />
                   </Button>
                 </td>

@@ -9,86 +9,86 @@ import { FaArrowLeft, FaCheck } from "react-icons/fa";
 import { v4 } from "uuid";
 import * as Yup from "yup";
 
-export default function mecanicoFormPage(props) {
-  const [mecanico, setmecanico] = useState({
-    mecanico: "",
+export default function pecaFormPage(props) {
+  const [peca, setpeca] = useState({
+    peca: "",
     carro: "",
-    mecanicos: "",
+    trabalho: "",
 
   });
 
+  const [feito, setfeito] = useState([]);
   const [servico, setservico] = useState([]);
-  const [caro, setcaro] = useState([]);
 
   const router = useRouter();
 
 
   useEffect(() => {
-    const servicoLocalStorage =
-      JSON.parse(localStorage.getItem("servico")) || [];
-    setservico(servicoLocalStorage);
+    const feitoLocalStorage =
+      JSON.parse(localStorage.getItem("feito")) || [];
+    setfeito(feitoLocalStorage);
   }, []);
 
 
   useEffect(() => {
-    if (mecanico.mecanico) {
-      const caroLocalStorage =
-        JSON.parse(localStorage.getItem("caro")) || [];
-      const caroFiltrados = caroLocalStorage.filter(
-        (c) => c.mecanicoId === mecanico.mecanico
+    if (peca.peca) {
+      const servicoLocalStorage =
+        JSON.parse(localStorage.getItem("servico")) || [];
+      const servicoFiltrados = servicoLocalStorage.filter(
+        (c) => c.pecaId === peca.peca
       );
-      setcaro(caroFiltrados);
+      setservico(servicoFiltrados);
     } else {
-      setcaro([]);
+      setservico([]);
     }
-  }, [mecanico.mecanico]);
+  }, [peca.peca]);
 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setmecanico({ ...mecanico, [name]: value });
+    setpeca({ ...peca, [name]: value });
   };
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const mecanicosLocalStorage = JSON.parse(localStorage.getItem("mecanicos")) || [];
-    mecanico.id = Date.now();
-    mecanicosLocalStorage.push(mecanico);
-    localStorage.setItem("mecanicos", JSON.stringify(mecanicosLocalStorage));
+    const trabalhoLocalStorage = JSON.parse(localStorage.getItem("trabalho")) || [];
+    peca.id = Date.now();
+    trabalhoLocalStorage.push(peca);
+    localStorage.setItem("trabalho", JSON.stringify(trabalhoLocalStorage));
     alert("Peça adicionada a lista");
-    router.push("/mecanicos");
+    router.push("/trabalho");
   };
 
   return (
-    <Pagina titulo={"Cadastro de Peças Desejada:"}>
+    <Pagina titulo={"Serviço desejado:"}>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formmecanico">
-          <Form.Label>Peça Desejada:</Form.Label>
+          <Form.Label>mecanico:</Form.Label>
           <Form.Control
             type="text"
             name="mecanico"
-            value={mecanico.mecanico}
+            value={peca.mecanico}
             onChange={handleChange}
             required
           />
         </Form.Group>
-        <Form.Group controlId="formmecanico">
-          <Form.Label>caro da Peça:</Form.Label>
+        <Form.Group controlId="formpeca">
+          <Form.Label>Serviço:</Form.Label>
           <Form.Control
             type="text"
-            name="caro"
-            value={mecanico.caro}
+            name="servico"
+            value={peca.servico}
             onChange={handleChange}
             required
           />
         </Form.Group>
-        <Form.Group controlId="formservico">
-          <Form.Label>servico da peça:</Form.Label>
+        <Form.Group controlId="formfeito">
+          <Form.Label>Especificaçoes::</Form.Label>
           <Form.Control
-            type="servico"
-            name="servico"
-            value={mecanico.servico}
+            type="feito"
+            name="feito"
+            value={peca.feito}
             onChange={handleChange}
             required
           />
@@ -96,7 +96,7 @@ export default function mecanicoFormPage(props) {
 
         <hr></hr>
         <Button variant="primary" type="submit">
-          Salvar
+          Enviar
         </Button>
       </Form>
     </Pagina>
