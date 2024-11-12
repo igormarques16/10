@@ -64,6 +64,7 @@ export default function clientePage() {
                 <td>{clientes.pais}</td>
                 <td>{clientes.estado}</td>
                 <td>{clientes.cidade}</td>
+                
                 <td className="text-center">
                   {/* Botões das ações */}
                   <Button

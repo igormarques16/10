@@ -1,7 +1,7 @@
 "use client";
 import './banner.css';
 import Pagina from "@/components/Pagina";
-import { Navbar, Nav, Container, Card, Button, ListGroup } from "react-bootstrap";
+import { Navbar, Nav, Container, Card, Button, ListGroup, Carousel } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
 export default function HomePage() {
@@ -23,7 +23,7 @@ export default function HomePage() {
     {
       nome: "Cliente",
       imagem:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKYhcHQ2sEmYYq3r4IvG7Eu8YxonuQVqAUEEgfHAPR2SmKg9WPgGzW1x3QPA1gFrT32dM&usqp=CAU",
+        "https://cdn-icons-png.flaticon.com/512/6009/6009897.png",
       quantidade: cliente.length,
       link: "/cliente",
     },
@@ -37,7 +37,7 @@ export default function HomePage() {
     {
       nome: "Serviços Prestado",
       imagem:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4elMoycwcUAUgE-ENtVGZz3ONNmn-_4Kfig&s",
+        "https://cdn-icons-png.flaticon.com/512/6516/6516055.png",
       quantidade: trabalho.length,
       link: "/trabalho",
     },
@@ -59,11 +59,26 @@ export default function HomePage() {
 
   return (
     <>
-
-
-
-      {/* Conteúdo da Página */}
       <Pagina>
+        {/* Carrossel */}
+        <Carousel>
+          {lista.map((item, index) => (
+            <Carousel.Item key={index}>
+              <img
+                className="d-block w-800"
+                src={item.imagem}
+                alt={`Slide de ${item.nome}`}
+                style={{ height: "200px", objectFit: "cover" }}
+              />
+              <Carousel.Caption>
+                <h3>{item.nome}</h3>
+                <p>Cadastrados: {item.quantidade}</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+
+        {/* Conteúdo Principal */}
         <h1 style={{ fontSize: "4rem", color: "#000000", textAlign: "center", marginTop: "20px" }}>
           Bem-vindo à Oficina do Igor
         </h1>
