@@ -22,16 +22,16 @@ export default function clienteFormPage(props) {
 
   const cliente = JSON.parse(localStorage.getItem("cliente")) || [];
 
-  // Recuperando id para edição
+ 
   const id = props.searchParams.id;
   console.log(props.searchParams.id);
-  // Buscar na lista a cliente com o ID recebido no parametro
+  
   const clienteEditada = cliente.find((item) => item.id == id);
   console.log(clienteEditada);
 
-  // carregar os dados na inicialização da página
+  
   useEffect(() => {
-    // buscar os paises da api, imprimi no log e guarda no armazenamento
+    
     apiLocalidades.get("/paises").then((response) => {
       console.log("paises >>> ", response.data);
       setPaises(response.data);
@@ -43,20 +43,19 @@ export default function clienteFormPage(props) {
     });
   }, []);
 
-  // função para salvar os dados do form
+ 
   function salvar(dados) {
-    // Se clienteEditada existe, mudar os dados e gravar no localStorage
+   
     if (clienteEditada) {
       Object.assign(clienteEditada, dados);
-      // Substitui a lista antiga pela nova no localStorage
+      
       localStorage.setItem("cliente", JSON.stringify(cliente));
     } else {
-      // se clienteEditada não existe, é criação de uma nova
-      // gerar um ID (Identificador unico)
+      
       dados.id = v4();
-      // Adiciona a nova cliente na lista de clientes
+      
       cliente.push(dados);
-      // Substitui a lista antiga pela nova no localStorage
+      
       localStorage.setItem("cliente", JSON.stringify(cliente));
     }
 
@@ -64,7 +63,7 @@ export default function clienteFormPage(props) {
     router.push("/cliente");
   }
 
-  // Campos do form e valores iniciais(default)
+  
   const initialValues = {
     nome: "",
     pais: "Brasil",
@@ -73,7 +72,7 @@ export default function clienteFormPage(props) {
     endereco: "",
   };
 
-  // Esquema de validação com Yup
+  
   const validationSchema = Yup.object().shape({
     nome: Yup.string().required("Campo obrigatório"),
     pais: Yup.string().required("Campo obrigatório"),
@@ -84,19 +83,17 @@ export default function clienteFormPage(props) {
 
   return (
     <Pagina titulo={"Cadastro de cliente"}>
-      {/* Formulário */}
+      
 
       <Formik
-        // Atributos do formik
-        // Se for edição, coloca os dados da clienteEditada
-        // Se for nova, colocar o initialValues com os valores vazios
+        
         initialValues={clienteEditada || initialValues}
         validationSchema={validationSchema}
         onSubmit={salvar}
       >
-        {/* construção do template do formulário */}
+       
         {
-          // os valores e funções do formik
+          
           ({
             values,
             errors,
@@ -105,10 +102,7 @@ export default function clienteFormPage(props) {
             handleBlur,
             handleSubmit,
           }) => {
-            // ações do formulário
-            // debug
-            // console.log("DEBUG >>>")
-            // console.log({values, errors, touched})
+           
 
             useEffect(() => {
               console.log("Mexeu no estado >>>");
@@ -122,10 +116,10 @@ export default function clienteFormPage(props) {
               }
             }, [values.estado]);
 
-            // retorno com o template jsx do formulário
+            
             return (
               <Form onSubmit={handleSubmit}>
-                {/* Campos do form */}
+                
                 <Row className="mb-2">
                   <Form.Group as={Col}>
                     <Form.Label>Nome:</Form.Label>

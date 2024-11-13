@@ -13,7 +13,7 @@ export default function trabalhoPage() {
 
 
   useEffect(() => {
-    // Busca a lista do localStorage, se não existir, inicia uma vazia
+    
     const trabalhosLocalStorage = JSON.parse(localStorage.getItem("trabalho")) || [];
 
     const trabalhoLocalStorage = JSON.parse(localStorage.getItem("trabalho")) || [];
@@ -42,7 +42,7 @@ export default function trabalhoPage() {
         </Button>
       </div>
 
-      {/* Tabela com os trabalho */}
+     
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -64,7 +64,7 @@ export default function trabalhoPage() {
 
 
               <td className="text-center">
-                {/* Botões das ações */}
+               
                 <Button className="me-2" href={`/trabalhos/form?id=${trabalhos.id}`}>
                   <FaPen />
                 </Button>

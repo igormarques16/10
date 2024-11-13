@@ -26,9 +26,9 @@ export default function clientePage() {
     ) {
      
       const novaLista = clientes.filter((item) => item.id !== cliente.id);
-      // grava no localStorage a nova lista
+      
       localStorage.setItem("cliente", JSON.stringify(novaLista));
-      // grava a nova lista no estado para renderizar na tela
+      
       setclientes(novaLista);
       alert("cliente excluída com sucesso!");
     }
@@ -42,7 +42,7 @@ export default function clientePage() {
         </Button>
       </div>
 
-      {/* Tabela com as cliente */}
+    
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -65,7 +65,7 @@ export default function clientePage() {
                 <td>{clientes.cidade}</td>
                 
                 <td className="text-center">
-                  {/* Botões das ações */}
+                 
                   <Button
                     className="me-2"
                     href={`/cliente/form?id=${clientes}`}

@@ -11,23 +11,23 @@ import * as Yup from "yup";
 export default function ProfessorFormPage(props) {
   const router = useRouter();
 
-  // Load existing professor data for editing if an ID is present
+  
   const id = props.searchParams?.id;
   const professores = JSON.parse(localStorage.getItem("professores")) || [];
   const professorEditado = professores.find((item) => item.id === id);
 
-  // Save form data to localStorage
+  
   function salvar(dados) {
     if (professorEditado) {
-      // Edit existing professor
+      
       Object.assign(professorEditado, dados);
     } else {
-      // Add new professor with unique ID
+     
       dados.id = uuidv4();
       professores.push(dados);
     }
 
-    // Save updated array to localStorage
+    
     localStorage.setItem("professores", JSON.stringify(professores));
 
     alert("Feedback salvo com sucesso!");

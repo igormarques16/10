@@ -15,12 +15,12 @@ export default function carroFormPage(props) {
   const carroEditadas = JSON.parse(localStorage.getItem("carroEditadas")) || [];
 
 
-  // Recupera o ID para edição, se disponível
+  
   const id = props.searchParams.id;
   const carro = JSON.parse(localStorage.getItem("carro")) || [];
   const carroEditada = carro.find((item) => item.id == id);
 
-  // Função para salvar os dados do form
+  
   function salvar(dados) {
     if (carroEditada) {
       Object.assign(carroEditada, dados);
