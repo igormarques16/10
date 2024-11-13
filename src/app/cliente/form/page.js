@@ -11,15 +11,15 @@ import { v4 } from "uuid";
 import * as Yup from "yup";
 
 export default function clienteFormPage(props) {
-  // router -> hook para navegação de telas
+  
   const router = useRouter();
 
-  // Criar estados(react) para armazenar os dados dos selects
+ 
   const [paises, setPaises] = useState([]);
   const [estados, setEstados] = useState([]);
   const [cidades, setCidades] = useState([]);
 
-  // Buscar a lista de clientes no localStorage, se não existir, inicializa uma lista vazia
+
   const cliente = JSON.parse(localStorage.getItem("cliente")) || [];
 
   // Recuperando id para edição

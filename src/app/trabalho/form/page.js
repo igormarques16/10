@@ -56,7 +56,7 @@ export default function pecaFormPage(props) {
     peca.id = Date.now();
     trabalhoLocalStorage.push(peca);
     localStorage.setItem("trabalho", JSON.stringify(trabalhoLocalStorage));
-    alert("Peça adicionada a lista");
+    alert("Orden adicionada!");
     router.push("/trabalho");
   };
 

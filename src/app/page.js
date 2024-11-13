@@ -60,7 +60,7 @@ export default function HomePage() {
   return (
     <>
       <Pagina>
-        {/* Carrossel */}
+        
         <Carousel>
           {lista.map((item, index) => (
             <Carousel.Item key={index}>
@@ -78,25 +78,31 @@ export default function HomePage() {
           ))}
         </Carousel>
 
-        {/* Conteúdo Principal */}
-        <h1 style={{ fontSize: "4rem", color: "#000000", textAlign: "center", marginTop: "20px" }}>
+        
+        <h1 style={{ fontSize: "5rem", color: "black", textAlign: "center", marginTop: "30px" }}>
           Bem-vindo à Oficina do Igor
         </h1>
 
-        {/* Lista de Itens em Formato de Lista */}
+  
+
+
+
+
         <ListGroup variant="flush">
           {lista.map((item, index) => (
-            <ListGroup.Item key={index} className="mb-3">
+            <ListGroup.Item key={index} className="mb-1">
               <Card className="flex-row align-items-center interactive-card">
-                <Card.Img src={item.imagem} style={{ width: "150px", height: "150px", objectFit: "cover", marginRight: "20px" }} />
+                <Card.Img src={item.imagem} style={{ width: "160px", height: "150px", objectFit: "cover", marginRight: "20px" }} />
                 <Card.Body>
                   <Card.Title>{item.nome}</Card.Title>
                   <p>Cadastrados: {item.quantidade}</p>
-                  <Button href={item.link} variant="primary">
-                    Ver Lista
-                  </Button>
+                  <button type="button" class="btn btn-outline-secondary">Cadastros:</button>
                 </Card.Body>
               </Card>
+
+
+
+              
             </ListGroup.Item>
           ))}
         </ListGroup>

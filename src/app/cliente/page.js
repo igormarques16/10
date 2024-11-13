@@ -12,8 +12,7 @@ export default function clientePage() {
  
   useEffect(() => {
 
-    const clienteLocalStorage =
-      JSON.parse(localStorage.getItem("cliente")) || [];
+    const clienteLocalStorage = JSON.parse(localStorage.getItem("cliente")) || [];
    
     setclientes(clienteLocalStorage);
     console.log(clienteLocalStorage);
@@ -52,7 +51,7 @@ export default function clientePage() {
             <th>Estado</th>
             <th>Bairro</th>
             <th>Cidade</th>
-            <th>Altere</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -61,7 +60,7 @@ export default function clientePage() {
               <tr key={clientes.id}>
                 <td>{clientes.nome}</td>
                 <td>{clientes.endereco}</td>
-                <td>{clientes.pais}</td>
+                <td>{clientes.bairro}</td>
                 <td>{clientes.estado}</td>
                 <td>{clientes.cidade}</td>
                 

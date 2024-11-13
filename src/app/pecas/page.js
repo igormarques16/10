@@ -36,6 +36,7 @@ export default function pecasPage() {
             <th>Peças </th>
             <th>Codigos</th>
             <th>Marca</th>
+            <th></th>
 
           </tr>
         </thead>

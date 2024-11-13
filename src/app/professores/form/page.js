@@ -1,153 +1,131 @@
 "use client";
-import '../../banner.css'
+import '../../banner.css';
 import Pagina from "@/components/Pagina";
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { FaArrowLeft, FaCheck } from "react-icons/fa";
-import { v4 } from "uuid";
+import { v4 as uuidv4 } from "uuid";
 import * as Yup from "yup";
 
-export default function professoresFormPage(props) {
-  
+export default function ProfessorFormPage(props) {
   const router = useRouter();
 
-  
-  const feedback = JSON.parse(localStorage.getItem("feedback")) || [];
-
-  // Buscar a lista de feedback no localStorage, se não existir, inicializa uma lista vazia
+  // Load existing professor data for editing if an ID is present
+  const id = props.searchParams?.id;
   const professores = JSON.parse(localStorage.getItem("professores")) || [];
+  const professorEditado = professores.find((item) => item.id === id);
 
-  // Recuperando id para edição
-  const id = props.searchParams.id;
-  console.log(props.searchParams.id);
-  // Buscar na lista a faculdade com o ID recebido no parametro
-  const professoresEditado = professores.find((item) => item.id == id);
-  console.log(professoresEditado);
-
-  // função para salvar os dados do form
+  // Save form data to localStorage
   function salvar(dados) {
-    // Se professoresEditado existe, mudar os dados e gravar no localStorage
-    if (professoresEditado) {
-      Object.assign(professoresEditado, dados);
-      // Substitui a lista antiga pela nova no localStorage
-      localStorage.setItem("professores", JSON.stringify(professores));
+    if (professorEditado) {
+      // Edit existing professor
+      Object.assign(professorEditado, dados);
     } else {
-      // se professoresEditado não existe, é criação de uma nova
-      // gerar um ID (Identificador unico)
-      dados.id = v4();
-      // Adiciona a nova faculdade na lista de faculdades
+      // Add new professor with unique ID
+      dados.id = uuidv4();
       professores.push(dados);
-      // Substitui a lista antiga pela nova no localStorage
-      localStorage.setItem("professores", JSON.stringify(professores));
     }
 
-    alert("feedback enviado com sucesso!");
+    // Save updated array to localStorage
+    localStorage.setItem("professores", JSON.stringify(professores));
+
+    alert("Feedback salvo com sucesso!");
     router.push("/professores");
   }
 
-  // Campos do form e valores iniciais(default)
   const initialValues = {
     nome: "",
-
-
-
-    feedback: "",
+    avaliacao: "",
+    dicas: "",
   };
 
-  // Esquema de validação com Yup
   const validationSchema = Yup.object().shape({
     nome: Yup.string().required("Campo obrigatório"),
-    dataNascimento: Yup.date().required("Campo obrigatório"),
-    feedback: Yup.string().required("Campo obrigatório"),
-    status: Yup.string().required("Campo obrigatório"),
-    feedback: Yup.string().required("Campo obrigatório"),
+    avaliacao: Yup.string().required("Campo obrigatório"),
+    dicas: Yup.string().required("Campo obrigatório"),
   });
 
   return (
-    <Pagina titulo={"Nós Avalie!"}>
-      {/* Formulário */}
-
+    <Pagina titulo="Sua Avaliação">
       <Formik
-        // Atributos do formik
-        // Se for edição, coloca os dados de professoresEditado
-        // Se for nova, colocar o initialValues com os valores vazios
-        initialValues={professoresEditado || initialValues}
+        initialValues={professorEditado || initialValues}
         validationSchema={validationSchema}
         onSubmit={salvar}
       >
-        {/* construção do template do formulário */}
-        {
-          // os valores e funções do formik
-          ({
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-          }) => {
-            // ações do formulário
-            // debug
-            // console.log("DEBUG >>>")
-            // console.log({values, errors, touched})
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+        }) => (
+          <Form onSubmit={handleSubmit}>
+            <Row className="mb-2">
+              <Form.Group as={Col}>
+                <Form.Label>Nome:</Form.Label>
+                <Form.Control
+                  name="nome"
+                  type="text"
+                  value={values.nome}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  isValid={touched.nome && !errors.nome}
+                  isInvalid={touched.nome && errors.nome}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.nome}
+                </Form.Control.Feedback>
+              </Form.Group>
 
-            // retorno com o template jsx do formulário
-            return (
-              <Form onSubmit={handleSubmit}>
-                {/* Campos do form */}
-                <Row className="mb-2">
-                  <Form.Group as={Col}>
-                    <Form.Label>Nome:</Form.Label>
-                    <Form.Control
-                      name="nome"
-                      type="text"
-                      value={values.nome}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      isValid={touched.nome && !errors.nome}
-                      isInvalid={touched.nome && errors.nome}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.nome}
-                    </Form.Control.Feedback>
-                  </Form.Group>
+              <Form.Group as={Col}>
+                <Form.Label>Gostou do atendimento?</Form.Label>
+                <Form.Control
+                  name="avaliacao"
+                  type="text"
+                  value={values.avaliacao}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  isValid={touched.avaliacao && !errors.avaliacao}
+                  isInvalid={touched.avaliacao && errors.avaliacao}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.avaliacao}
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Row>
 
+            <Row className="mb-2">
+              <Form.Group as={Col}>
+                <Form.Label>Sobre o Serviço executado em seu carro:</Form.Label>
+                <Form.Control
+                  name="dicas"
+                  type="text"
+                  value={values.dicas}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  isValid={touched.dicas && !errors.dicas}
+                  isInvalid={touched.dicas && errors.dicas}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.dicas}
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Row>
 
-                </Row>
-
-
-                <Form.Group as={Col}>
-                  <Form.Label>FeedBack:</Form.Label>
-                  <Form.Control
-                    name="feedback"
-                    type="text"
-                    value={values.feedback}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    isValid={touched.feedback && !errors.feedback}
-                    isInvalid={touched.feedback && errors.feedback}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.feedback}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-
-                <hr></hr>
-                {/* botões */}
-                <Form.Group className="text-end">
-                  <Button className="me-2" href="/professores">
-                    <FaArrowLeft /> Voltar
-                  </Button>
-                  <Button type="submit" variant="success">
-                    <FaCheck /> Envie seu feedback!
-                  </Button>
-                </Form.Group>
-              </Form>
-            );
-          }
-        }
+            <Form.Group as={Row} className="text-end mt-3">
+              <Col>
+                <Button className="me-2" href="/professores" variant="secondary">
+                  <FaArrowLeft /> Voltar
+                </Button>
+                <Button type="submit" variant="success">
+                  <FaCheck /> Enviar
+                </Button>
+              </Col>
+            </Form.Group>
+          </Form>
+        )}
       </Formik>
     </Pagina>
   );

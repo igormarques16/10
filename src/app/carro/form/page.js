@@ -11,7 +11,7 @@ import * as Yup from "yup";
 export default function carroFormPage(props) {
   const router = useRouter();
 
-  // Busca a lista de carroEditadas e modeloes para usar nos selects
+  
   const carroEditadas = JSON.parse(localStorage.getItem("carroEditadas")) || [];
 
 
@@ -32,23 +32,23 @@ export default function carroFormPage(props) {
     }
 
     alert("carro salva com sucesso!");
-    router.push("/carros");
+    router.push("/carro");
   }
 
-  // Valores iniciais do formulário
+
   const initialValues = {
     nome: "",
-
+    descricao: "",
     carroEditada: "",
-    cor: "", // Adiciona o campo "cor" nos valores iniciais
+    cor: "",
   };
 
-  // Validação com Yup
+  
   const validationSchema = Yup.object().shape({
     nome: Yup.string().required("Campo obrigatório"),
     descricao: Yup.string().required("Campo obrigatório"),
     carroEditada: Yup.string().required("Campo obrigatório"),
-    cor: Yup.string().required("Campo obrigatório"), // Valida o campo "cor"
+    cor: Yup.string().required("Campo obrigatório"), 
   });
 
   return (
@@ -113,13 +113,13 @@ export default function carroFormPage(props) {
                     isValid={touched.carroEditada && !errors.carroEditada}
                     isInvalid={touched.carroEditada && errors.carroEditada}
                   >
-                    <option value="">Selecione</option>
-                    <option value="Ativo">Ford</option>
-                    <option value="Ativo">Honda</option>
-                    <option value="Ativo">Hyundai</option>
-                    <option value="Ativo">Nissan</option>
-                    <option value="Ativo">Fiat</option>
-                    <option value="Ativo">BMW</option>
+                    <option value="ativo">Selecione</option>
+                    <option value="For">Ford</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Hyunday">Hyundai</option>
+                    <option value="Nissan">Nissan</option>
+                    <option value="Fiat">Fiat</option>
+                    <option value="BMW">BMW</option>
                     {carroEditadas.map((carroEditada) => (
                       <option key={carroEditada.id} value={carroEditada.id}>
                         {carroEditada.nome}

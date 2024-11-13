@@ -9,21 +9,21 @@ import { FaPen, FaPlusCircle, FaTrash } from "react-icons/fa";
 export default function carroPage() {
   const [carros, setcarros] = useState([]);
 
-  
+
   useEffect(() => {
-    // Busca as carro do localStorage, se não existir, inicia uma lista vazia
+
     const carroLocalStorage = JSON.parse(localStorage.getItem("carro")) || [];
     setcarros(carroLocalStorage);
     console.log(carroLocalStorage);
   }, []);
 
-  // Função para exclusão de uma carro
+
   function excluir(carro) {
     if (window.confirm(`Deseja realmente excluir a carro ${carro.carro}?`)) {
       const novaLista = carros.filter((item) => item.id !== carro.id);
-      localStorage.setItem("carros", JSON.stringify(novaLista));
+      localStorage.setItem("carro", JSON.stringify(novaLista));
       setcarros(novaLista);
-      alert("carro excluídO com sucesso!");
+      alert("carro excluído com sucesso!");
     }
   }
 
@@ -35,24 +35,27 @@ export default function carroPage() {
         </Button>
       </div>
 
-      {/* Tabela com as carro */}
+
       <Table striped bordered hover>
         <thead>
           <tr>
             <th>Modelos</th>
-            <th>Cor</th>
             <th>Ano</th>
+            <th>Marca</th>
+            <th>Cor</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           {carros.map((carros) => (
             <tr key={carros.id}>
-              <td>{carros.carro}</td>
-              <td>{carros.Cor}</td>
-              <td>{carros.Ano}</td>
+              <td>{carros.nome}</td>
+              <td>{carros.descricao}</td>
+              <td>{carros.carroEditada}</td>
+              <td>{carros.cor}</td>
               <td className="text-center">
-                {/* Botões das ações */}
-                <Button className="me-2" href={`/carro/form?id=${carros.id}`}>
+
+                <Button className="me-2" href={`/carro/form?id=${carros}`}>
                   <FaPen />
                 </Button>
                 <Button variant="danger" onClick={() => excluir(carros)}>

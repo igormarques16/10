@@ -49,7 +49,7 @@ export default function trabalhoPage() {
             <th>Mecanico:</th>
             <th>servico:</th>
             <th>Especificaçoes:</th>
-            <th>:</th>
+            <th></th>
 
           </tr>
         </thead>
