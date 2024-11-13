@@ -1,6 +1,6 @@
 "use client";
 import '../../banner.css'
-import { useState, useEffect } from "react"; // Importando React e useEffect corretamente
+import { useState, useEffect } from "react";
 import Pagina from "@/components/Pagina";
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
